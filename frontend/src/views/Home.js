@@ -31,10 +31,11 @@ export default class Home extends Component {
   render() {
 
   // Ottieni l'anno corrente
+  const currentYear = new Date().getFullYear();
     return (
       <div className='container-fluid d-flex justify-content-center flex-column text-center vh-100'>
-            <h1>App Students</h1>
-            <span>Created By : <strong>Michele Porcaro | </strong></span>
+            <h1>App Todo</h1>
+            <span>Created By : <strong>Michele Porcaro | {currentYear}</strong></span>
         </div>
     );
   }
