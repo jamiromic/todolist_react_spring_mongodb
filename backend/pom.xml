@@ -13,7 +13,7 @@
 	<artifactId>backend</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<description>Demo project for Spring Boot Auth with Spring Security,
+	<description>Todo App for Spring Boot Auth with Spring Security,
 		JWT, MongoDB</description>
 
 	<properties>
