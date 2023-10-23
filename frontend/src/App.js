@@ -12,13 +12,13 @@ import Profile from "./views/Profile";
 import BoardUser from "./views/board-user";
 import BoardModerator from "./views/board-moderator";
 import BoardAdmin from "./views/board-admin";
-import StudentList from "./views/students/StudentList";
-import StudentCreate from "./views/students/StudentCreate";
 import StudentUpdate from "./views/students//StudentUpdate";
 import StudentDetails from "./views/students/StudentDetails";
 
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
+import TodoList from "./views/students/TodoList";
+import TodoCreate from "./views/students/TodoCreate";
 
 class App extends Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class App extends Component {
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-            App Students
+            App ToDo
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -95,8 +95,8 @@ class App extends Component {
 
             {currentUser && (
               <li className="nav-item">
-                <Link to={"/students"} className="nav-link">
-                  Students
+                <Link to={"/todos"} className="nav-link">
+                  ToDo
                 </Link>
               </li>
             )}
@@ -142,12 +142,12 @@ class App extends Component {
             <Route path="/user" element={<BoardUser />} />
             <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
-            {/* Pagina Lista Studenti */}
-            <Route path="/students" element={<StudentList/>} />
-            {/* Pagina Dettaglio Studente */}
+            {/* Pagina Lista Todos */}
+            <Route path="/todos" element={<TodoList/>} />
+            {/* Pagina Dettaglio Todo */}
             <Route path="/students/:id" element={<StudentDetails/>} />
             {/* Pagina per la creazione di uno studente */}
-            <Route path="/students/create" element={<StudentCreate/>} />
+            <Route path="/todos/create" element={<TodoCreate/>} />
             {/* Pagina per la modifica di uno studente */}
             <Route path="/students/update/:id" element={<StudentUpdate/>} />
           </Routes>

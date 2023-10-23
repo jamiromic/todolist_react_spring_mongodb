@@ -9,7 +9,7 @@ export default class BoardUser extends Component {
     super(props);
 
     this.state = {
-      students: ""
+      todos: ""
     };
   }
 
@@ -42,8 +42,8 @@ export default class BoardUser extends Component {
       <div className="container">
         <header className="jumbotron">
         <ButtonElement
-                text='Vai su Students'
-                url='/students/'
+                text='Vai su Todos'
+                url='/todos/'
                 bgcolor='rgb(127, 255, 185)'
         />
         </header>
