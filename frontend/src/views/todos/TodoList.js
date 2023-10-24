@@ -34,18 +34,16 @@ function TodoList() {
         color='black'
       />
       <ButtonElement
-        text='Crea un nuovo To Do'
+        text='Crea un nuovo ToDo'
         url='/todos/create'
         bgcolor='rgb(255, 127, 127)'
         color='black'
       />
       <h1 style={{
-        backgroundImage: 'linear-gradient(rgb(255, 232, 127), rgb(255, 127, 127))',
-        WebkitBackgroundClip: 'text',
-        WebkitTextFillColor: 'transparent',
+        color: 'black',
         textAlign: 'center',
         marginBottom: '2rem'
-      }}>App ToDoList</h1>
+      }}>ToDo List</h1>
       <div className='d-flex justify-content-center flex-column align-items-center'>
       {todos.map(todo => (
           <TodoCard
