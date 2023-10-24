@@ -11,10 +11,10 @@ function TodoCard(props) {
   const { id, title, description } = props;
 
   const style = {
-    width: '300px',
-    padding: '1rem',
+    width: '900px',
+    padding: '0.5rem',
     boxShadow: '2px 2px 5px rgba(0, 0, 0, 0.25)',
-    margin: '2rem',
+    margin: '0.75rem',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -23,14 +23,18 @@ function TodoCard(props) {
   return ( // il componente ritorna la seguente struttura HTML
     <div style={style}> 
       <h2>{title}</h2>
-      <p><strong> Testo: </strong> {description}</p>
-      <ButtonElement 
-      url={`/todos/${id}`}
-      text={'Gestisci ToDo'}
-      bgcolor={'#addbf0'}
-      width={150}
-      color={'black'}
-      />
+      <p>{description}</p>
+      <div>
+        {<ButtonElement
+        url={`/todos/${id}`}
+        text={'Dettagli'}
+        bgcolor={'#addbf0'}
+        width={80}
+        color={'black'}
+        textAlign={'center'}
+        />}
+      </div>
+      
     </div>
   );
 }

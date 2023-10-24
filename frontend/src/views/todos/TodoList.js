@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import StudentCard from '../../components/TodoCard';
 import ButtonElement from '../../components/ButtonElement';
 import authService from '../../services/auth.service';
+import TodoCard from '../../components/TodoCard';
+import { BACKEND_URL } from '../../config';
 
 
 function TodoList() {
@@ -13,7 +14,7 @@ function TodoList() {
       window.location.href = "/login";
       return;
     }
-    fetch('http://localhost:8080/api/auth/todos/', {
+    fetch(BACKEND_URL, {
       headers: {
         Authorization: `Bearer ${currentUser.accessToken}`
       }
@@ -45,9 +46,9 @@ function TodoList() {
         textAlign: 'center',
         marginBottom: '2rem'
       }}>App ToDoList</h1>
-      <div className='d-flex justify-content-center'>
+      <div className='d-flex justify-content-center flex-column align-items-center'>
       {todos.map(todo => (
-          <StudentCard
+          <TodoCard
             key={todo.id}
             id={todo.id}
             title={todo.title}

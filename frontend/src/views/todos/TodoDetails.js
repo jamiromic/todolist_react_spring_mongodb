@@ -2,38 +2,39 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ButtonElement from '../../components/ButtonElement';
 import AuthService from '../../services/auth.service';
+import {BACKEND_URL} from '../../config';
 
-function StudentDetails() { 
-  const { id } = useParams(); // ottiene l'ID dello studente dalla URL utilizzando il hook useParams()
+function TodoDetails() { 
+  const { id } = useParams(); // ottiene l'ID del toDo dalla URL utilizzando il hook useParams()
 
-  const [student, setStudent] = useState(null); // definisce uno stato per contenere le informazioni sullo studente
+  const [todo, setTodo] = useState(null); // definisce uno stato per contenere le informazioni sul Todo
 
-  // Recupera le informazioni sullo studente dalle API utilizzando l'ID, utilizzando il hook useEffect()
+  // Recupera le informazioni sul ToDo dalle API utilizzando l'ID, utilizzando il hook useEffect()
   useEffect(() => {
     const currentUser = AuthService.getCurrentUser();
     if (!currentUser) {
       window.location.href = "/login";
       return;
     }
-    fetch(`http://localhost:8080/api/auth/students/${id}`, {
+    fetch(`${BACKEND_URL}${id}`, {
       headers: {
         Authorization: `Bearer ${currentUser.accessToken}`
       }
     })
       .then(response => response.json())
-      .then(data => setStudent(data))
+      .then(data => setTodo(data))
       .catch(error => console.log(error));
   }, [id]);
 
-  // Se le informazioni sullo studente non sono ancora state recuperate, mostra un messaggio di caricamento
-  if (!student) {
+  // Se le informazioni sul ToDO non sono ancora state recuperate, mostra un messaggio di caricamento
+  if (!todo) {
     return <p>Caricamento in corso...</p>;
   }
 
-  // Definisce le funzioni per eliminare uno studente
+  // Definisce le funzioni per eliminare un ToDo
   function handleDelete(event) {
     const idItem = event.target.id;
-    fetch('http://localhost:8080/api/auth/students/delete/' + idItem, {
+    fetch(`${BACKEND_URL}delete/${idItem}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -42,31 +43,30 @@ function StudentDetails() {
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.error(error));
-      window.location.href = '/students/';
+      window.location.href = '/todos/';
   }
-  // Definisce le funzioni per aggiornare uno studente
+  // Definisce le funzioni per aggiornare un ToDo
   function handleUpdate(event) {
     const idItem = event.target.id;
-    window.location.href = '/students/update/' + idItem;
+    window.location.href = '/todos/update/' + idItem;
   }
 
-  // Mostra le informazioni sullo studente e i pulsanti per eliminare e aggiornare lo studente
+  // Mostra le informazioni sul ToDo e i pulsanti per eliminare e aggiornare il ToDo
   return (
     <div>
       <ButtonElement
-      text='Torna alla lista degli studenti'
-      url='/students'
+      text='Torna alla lista dei ToDo'
+      url='/todos'
       bgcolor='#7fe37f'
       color='black'
       />
       <div className='d-flex align-content-center flex-column text-center mt-5'> 
-        <h1>{student.name} {student.surname}</h1> 
-        <p><strong>Età: </strong>{student.age}</p>
-        <p><strong>Email: </strong>{student.email}</p>
+        <h1>{todo.title}</h1> 
+        <p>{todo.description}</p>
         <div className='d-flex justify-content-center'>
           <ButtonElement
             text='Modifica'
-            id={student.id}
+            id={todo.id}
             onClick={handleUpdate}
             bgcolor='#3780ec'
             color='white'
@@ -74,7 +74,7 @@ function StudentDetails() {
           />
           <ButtonElement
             text='Delete'
-            id={student.id}
+            id={todo.id}
             onClick={handleDelete}
             bgcolor='#d76565'
             color='white'
@@ -87,4 +87,4 @@ function StudentDetails() {
   );
 }
 
-export default StudentDetails; 
+export default TodoDetails;

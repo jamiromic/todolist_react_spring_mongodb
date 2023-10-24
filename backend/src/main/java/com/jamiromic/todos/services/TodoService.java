@@ -32,6 +32,19 @@ public class TodoService {
         return todoRepository.save(todo);
     }
 
+    public Todo updateTodo(Long id, String title, String description) {
+        Optional<Todo> existingTodo = todoRepository.findById(id);
+
+        if (existingTodo.isPresent()) {
+            Todo todo = existingTodo.get();
+            todo.setTitle(title);
+            todo.setDescription(description);
+            return todoRepository.save(todo);
+        } else {
+            throw new IllegalArgumentException("Todo not found");
+        }
+    }
+
     public void deleteById(Long id) {
         todoRepository.deleteById(id);
     }

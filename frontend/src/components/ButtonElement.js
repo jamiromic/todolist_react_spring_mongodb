@@ -10,10 +10,9 @@ function ButtonElement(props) {
         color: color,
         display: 'inline-block',
         fontSize: '1rem',
-        padding: '0.5rem 0.75rem',
+        padding: '0.5rem',
         borderRadius: '10px',
         boxShadow: '0 2px 4px rgba(0,0,0,.2)',
-        alignSelf: 'center',
         textAlign: 'center',
         margin: '1.5rem',
         textDecoration: 'none'

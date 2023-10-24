@@ -12,13 +12,14 @@ import Profile from "./views/Profile";
 import BoardUser from "./views/board-user";
 import BoardModerator from "./views/board-moderator";
 import BoardAdmin from "./views/board-admin";
-import StudentUpdate from "./views/students//StudentUpdate";
-import StudentDetails from "./views/students/StudentDetails";
+import TodoUpdate from "./views/todos/TodoUpdate";
 
-// import AuthVerify from "./common/auth-verify";
+import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
-import TodoList from "./views/students/TodoList";
-import TodoCreate from "./views/students/TodoCreate";
+import TodoList from "./views/todos/TodoList";
+import TodoCreate from "./views/todos/TodoCreate";
+import TodoDetails from "./views/todos/TodoDetails";
+import {BACKEND_URL} from "./config";
 
 class App extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class App extends Component {
       showModeratorBoard: false,
       showAdminBoard: false,
       currentUser: undefined,
+      url: BACKEND_URL
     };
   }
 
@@ -145,15 +147,15 @@ class App extends Component {
             {/* Pagina Lista Todos */}
             <Route path="/todos" element={<TodoList/>} />
             {/* Pagina Dettaglio Todo */}
-            <Route path="/students/:id" element={<StudentDetails/>} />
+            <Route path="/todos/:id" element={<TodoDetails/>} />
             {/* Pagina per la creazione di uno studente */}
             <Route path="/todos/create" element={<TodoCreate/>} />
             {/* Pagina per la modifica di uno studente */}
-            <Route path="/students/update/:id" element={<StudentUpdate/>} />
+            <Route path="/todos/update/:id" element={<TodoUpdate/>} />
           </Routes>
         </div>
 
-        {/* <AuthVerify logOut={this.logOut}/> */}
+        {<AuthVerify logOut={this.logOut}/>}
       </div>
     );
   }
