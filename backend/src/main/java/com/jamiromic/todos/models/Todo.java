@@ -12,7 +12,7 @@ public class Todo {
 
     @Id
     private Long id;
-
+    private String userId;
     private String title;
     private String description;
     private boolean completed;

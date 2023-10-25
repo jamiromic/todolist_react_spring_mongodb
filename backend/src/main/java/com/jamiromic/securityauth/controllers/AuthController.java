@@ -8,8 +8,11 @@ import java.util.stream.Collectors;
 import com.jamiromic.securityauth.models.ERole;
 import com.jamiromic.securityauth.models.User;
 import com.jamiromic.securityauth.repository.UserRepository;
+import com.jamiromic.todos.services.TodoService;
 import jakarta.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -51,6 +54,8 @@ public class AuthController {
 	@Autowired
 	JwtUtils jwtUtils;
 
+	private static final Logger logger = (Logger) LoggerFactory.getLogger(AuthController.class);
+
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -59,6 +64,7 @@ public class AuthController {
 
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
+		logger.debug("Genero un nuovo Token");
 		
 		UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();		
 		List<String> roles = userDetails.getAuthorities().stream()

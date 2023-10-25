@@ -3,6 +3,8 @@ package com.jamiromic.todos.services;
 import com.jamiromic.todos.models.Todo;
 import com.jamiromic.todos.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 
@@ -26,9 +28,16 @@ public class TodoService {
         return todoRepository.findById(id);
     }
 
+    public Optional<List<Todo>> getByUserId(String userId) {
+        return todoRepository.findByUserId(userId);
+    }
+
     public Todo createTodo(Todo todo) {
         Long nextId = idCounter.getAndIncrement();
         todo.setId(nextId);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+        todo.setUserId(userId);
         return todoRepository.save(todo);
     }
 

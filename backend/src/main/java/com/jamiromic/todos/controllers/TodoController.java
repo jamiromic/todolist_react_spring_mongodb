@@ -6,6 +6,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
@@ -21,12 +23,16 @@ public class TodoController {
 
     private static final Logger logger = (Logger) LoggerFactory.getLogger(TodoService.class);
 
-    @Operation(summary = "Recupera lista dei ToDo")
+
+
+    @Operation(summary = "Recupera lista dei ToDo filtrata per utente")
     @GetMapping("/")
-    public List<Todo> getAll()
+    public Optional<List<Todo>> getByUserId()
     {
-        logger.debug("Recupero lista ToDo");
-        return todoService.getAll();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String userId = authentication.getName();
+        logger.debug("Recupero lista ToDo utente attualmente loggato");
+        return todoService.getByUserId(userId);
     }
 
 
