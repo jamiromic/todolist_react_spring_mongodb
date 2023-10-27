@@ -15,8 +15,8 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      mongodb:
-        condition: service_healthy
+      - mongodb
+        
     environment:
       spring.data.mongodb.database: todolistdb
       spring.data.mongodb.host: mongodb
@@ -27,8 +27,3 @@ services:
     image: mongo:latest
     ports:
       - "27017:27017"
-    healthcheck:
-      test: ["CMD", "mongo", "localhost:27017", "--eval", "db.runCommand({ping: 1})"]
-      interval: 10s
-      timeout: 10s
-      retries: 5
