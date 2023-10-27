@@ -83,11 +83,11 @@ function TodoUpdate() {
       <form className=" d-flex flex-column text-center" onSubmit={handleSubmit}>
         <div>
           <label style={{width: '80px'}} htmlFor="title">Titolo: </label>
-          <input required type="text" id="title" value={todo.title} onChange={handleNewTitleChange} />
+          <input required style={{width: '400px'}} type="text" id="title" value={todo.title} onChange={handleNewTitleChange} />
         </div>
         <div>
           <label style={{width: '80px'}} htmlFor="description">Testo: </label>
-          <input required type="text" id="description" value={todo.description} onChange={handleNewDescriptionChange} />
+          <textarea rows={6} cols={50} required type="text" id="description" value={todo.description} onChange={handleNewDescriptionChange} />
         </div>
         <div className="pt-3">
           <ButtonElement

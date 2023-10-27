@@ -44,7 +44,7 @@ function TodoList() {
         textAlign: 'center',
         marginBottom: '2rem'
       }}>ToDo List</h1>
-      <div className='d-flex justify-content-center flex-column align-items-center'>
+      <div className='d-flex justify-content-center align-items-center flex-wrap'>
       {todos.map(todo => (
           <TodoCard
             key={todo.id}

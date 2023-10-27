@@ -68,7 +68,9 @@ function TodoCreate() {
         required
       />
       <label htmlFor="description">Descrizione</label>
-      <input
+      <textarea
+        rows={6}
+        cols={50}
         style={{width: '300px'}}
         type="text"
         id="description"
